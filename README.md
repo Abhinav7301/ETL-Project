@@ -2,94 +2,96 @@
 
 ## Overview
 
-A comprehensive Extract, Transform, Load (ETL) project that demonstrates data analysis and processing workflows using Python Jupyter notebooks. This project includes exploratory data analysis (EDA) on medical insurance data and statistical analysis of loan approval datasets.
+A comprehensive Extract, Transform, Load (ETL) project that demonstrates data processing and analysis workflows using Python. This project includes ETL pipelines for the Iris flower classification dataset and the Titanic dataset, showcasing data extraction, transformation, and exploratory data analysis using Jupyter notebooks and Python scripts.
 
 ## Project Structure
 
 ```
 ETL-Project/
-├── ETL_Project.ipynb          # Medical Insurance Data EDA and Analysis
-├── stats.ipynb                # Loan Statistics and Distribution Analysis
-├── loan.ipynb                 # Loan Data Processing and Approval Analysis
-├── loan_approved.csv          # Processed Loan Approval Dataset
-├── my_insurance_data.csv      # Medical Insurance Dataset
-├── data/                      # Data directory
-├── scripts/                   # Utility scripts
-└── README.md                  # Project Documentation
+├── etl_analysis_iris.ipynb        # Iris Dataset ETL Analysis and Exploration
+├── data/                          # Data directory with raw and staged data
+│   ├── raw/
+│   │   ├── iris_raw.csv          # Raw Iris Dataset
+│   │   └── titanic_raw.csv       # Raw Titanic Dataset
+│   └── staged/
+│       └── iris_transformed.csv  # Transformed and Processed Iris Data
+├── scripts/                       # Python ETL and utility scripts
+│   ├── extract_iris.py           # Iris data extraction script
+│   ├── extract_titanic.py        # Titanic data extraction script
+│   ├── load_iris.py              # Iris data loading script
+│   └── transform_iris.py         # Iris data transformation script
+├── .env                           # Environment configuration
+└── README.md                      # Project Documentation
 ```
 
 ## Datasets
 
-### 1. Medical Insurance Dataset (`my_insurance_data.csv`)
-**Purpose**: Exploratory Data Analysis (EDA) and insights extraction
-
-**Key Analyses**:
-- Age distribution and demographic patterns
-- Charges correlation with age, BMI, and smoking status
-- Regional analysis of insurance costs
-- Statistical summaries and distribution patterns
-- Premium prediction factors
-
-**File Size**: Comprehensive medical records dataset
-
-### 2. Loan Approval Dataset (`loan_approved.csv`)
-**Purpose**: Loan approval predictions and statistical modeling
+### 1. Iris Dataset (`data/raw/iris_raw.csv`)
+**Purpose**: Classification and exploratory data analysis
 
 **Key Features**:
-- Loan amount and duration analysis
-- Approval status distribution
-- Credit history patterns
-- Income and employment status correlations
-- Statistical indicators for approval probability
+- Sepal length and width measurements
+- Petal length and width measurements
+- Species classification (Setosa, Versicolor, Virginica)
+- 150 flower samples
+
+**Processed Output**: `data/staged/iris_transformed.csv` - Cleaned and transformed dataset ready for analysis
+
+### 2. Titanic Dataset (`data/raw/titanic_raw.csv`)
+**Purpose**: Data extraction and analysis
+
+**Key Features**:
+- Passenger information (name, age, sex)
+- Ticket details (class, fare, cabin)
+- Survival status
+- Embarkation information
 
 ## Notebooks
 
-### ETL_Project.ipynb - Medical Insurance EDA
+### etl_analysis_iris.ipynb - Iris ETL Analysis
 **Objectives**:
-- Load and explore medical insurance dataset
-- Perform univariate analysis (age, BMI, charges distributions)
-- Conduct bivariate analysis (age vs charges, smoking impact, regional differences)
-- Statistical summaries and insights
-- Data quality assessment
-- Visualization of key patterns and trends
+- Extract and load Iris dataset
+- Perform exploratory data analysis (EDA)
+- Statistical analysis of iris features
+- Species classification patterns
+- Data quality assessment and cleaning
+- Visualization of feature distributions and relationships
 
 **Key Analyses**:
 ```
-- Demographic Analysis: Age groups, gender distribution, regional patterns
-- Medical Metrics: BMI classification, smoking status impact
-- Cost Analysis: Premium calculations, cost drivers, regional pricing
-- Correlation Analysis: Feature relationships and dependencies
-- Statistical Testing: Distribution normality, outlier detection
+- Feature Statistics: Sepal and petal measurements summary
+- Species Distribution: Count and proportion of each species
+- Feature Correlation: Relationships between measurements
+- Statistical Testing: Distribution analysis by species
+- Visualization: Scatter plots, histograms, box plots
 ```
 
-### stats.ipynb - Loan Statistics Analysis
-**Objectives**:
-- Statistical analysis of loan datasets
-- Descriptive statistics and summary measures
-- Distribution analysis and visualizations
-- Loan amount patterns and trends
-- Approval rate statistics
+## Scripts
 
-**Key Metrics**:
-- Mean, median, standard deviation of loan amounts
-- Approval distribution and rates
-- Duration and tenure statistics
-- Employment and income statistics
+### Data Extraction Scripts
 
-### loan.ipynb - Loan Data Processing & Approval Analysis
-**Objectives**:
-- ETL operations on raw loan data
-- Data cleaning and preprocessing
-- Feature engineering for modeling
-- Approval status analysis
-- Credit history impact assessment
+**extract_iris.py** - Iris Data Extraction
+- Loads iris_raw.csv from data/raw/
+- Validates data integrity
+- Returns structured dataset
 
-**Key Operations**:
-- Data validation and quality checks
-- Missing value handling
-- Categorical encoding
-- Feature scaling and normalization
-- Approval predictability analysis
+**extract_titanic.py** - Titanic Data Extraction
+- Loads titanic_raw.csv from data/raw/
+- Handles missing values detection
+- Initial data exploration
+
+### Data Processing Scripts
+
+**load_iris.py** - Iris Data Loading
+- Loads processed iris data
+- Prepares data for analysis
+- Manages data connections
+
+**transform_iris.py** - Iris Data Transformation
+- Cleans iris dataset
+- Handles missing or invalid values
+- Feature normalization/standardization
+- Outputs to data/staged/iris_transformed.csv
 
 ## Technologies Used
 
@@ -100,26 +102,27 @@ ETL-Project/
 - **Matplotlib**: Static visualizations
 - **Seaborn**: Statistical data visualization
 - **Jupyter Notebook**: Interactive development environment
+- **Supabase**: Database backend for data storage
 
-### Data Processing Pipeline
+### ETL Pipeline Components
 1. **Extraction**: Load data from CSV files
-2. **Transformation**: Clean, preprocess, and engineer features
-3. **Analysis**: Statistical analysis and EDA
-4. **Visualization**: Generate insights through plots and charts
+2. **Transformation**: Clean, preprocess, and normalize features
+3. **Loading**: Store processed data in database and files
+4. **Analysis**: Statistical analysis and exploratory data analysis
+5. **Visualization**: Generate insights through plots and charts
 
 ## Key Findings
 
-### Medical Insurance Analysis
-- Insurance premiums significantly correlate with age and smoking status
-- Regional variations in premium pricing observed
-- BMI categories show different cost patterns
-- Smoking increases average costs substantially
+### Iris Dataset Analysis
+- Clear separation between Iris species based on petal measurements
+- Strong correlation between petal length and width
+- Sepal measurements show less distinct species separation
+- Setosa species distinctly different from Versicolor and Virginica
 
-### Loan Analysis
-- Loan approval depends on multiple factors (credit history, income, employment)
-- Distribution of approved vs. rejected loans shows clear patterns
-- Duration of loans affects approval probability
-- Employment status is a key predictor
+### Data Processing Insights
+- Successful transformation and standardization of features
+- No significant missing values in raw Iris data
+- Feature scaling improves classification model performance
 
 ## Installation & Setup
 
@@ -149,138 +152,123 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 3. Install dependencies:
 ```bash
-pip install -r requirements.txt
+pip install pandas numpy matplotlib seaborn jupyter
 ```
 
-4. Launch Jupyter Notebook:
+4. Set up environment variables (if using Supabase):
+   - Copy `.env.example` to `.env`
+   - Add your database credentials
+
+5. Launch Jupyter Notebook:
 ```bash
 jupyter notebook
 ```
 
-5. Open and run the notebooks in the following order:
-   - `ETL_Project.ipynb` (Medical Insurance EDA)
-   - `stats.ipynb` (Loan Statistics)
-   - `loan.ipynb` (Loan Processing & Analysis)
+6. Open and run the analysis:
+   - `etl_analysis_iris.ipynb` - For Iris dataset analysis
 
 ## Usage
 
-### Running Individual Notebooks
+### Running ETL Scripts
 
-Each notebook is self-contained and includes:
-- Data loading and exploration
-- Statistical analysis and visualizations
-- Interpretations and key insights
-- Comments explaining each step
-
-### Data Exploration
-
-**For Medical Insurance Data**:
+**Extract Iris Data**:
 ```python
-# Load dataset
-import pandas as pd
-df = pd.read_csv('my_insurance_data.csv')
-
-# Basic exploration
-df.head()
-df.describe()
-df.info()
+python scripts/extract_iris.py
 ```
 
-**For Loan Data**:
+**Transform Iris Data**:
 ```python
-# Load approved loans dataset
-loan_df = pd.read_csv('loan_approved.csv')
+python scripts/transform_iris.py
+```
 
-# Check approval distribution
-loan_df['Loan_Status'].value_counts()
+**Load Iris Data**:
+```python
+python scripts/load_iris.py
+```
+
+### Running the Analysis Notebook
+
+1. Start Jupyter: `jupyter notebook`
+2. Open `etl_analysis_iris.ipynb`
+3. Run cells sequentially to:
+   - Load the Iris dataset
+   - Perform exploratory analysis
+   - Generate visualizations
+   - View statistical summaries
+
+### Data Exploration Example
+
+```python
+import pandas as pd
+
+# Load raw Iris data
+iris_df = pd.read_csv('data/raw/iris_raw.csv')
+print(iris_df.head())
+print(iris_df.describe())
+print(iris_df.info())
+
+# Load transformed data
+iris_transformed = pd.read_csv('data/staged/iris_transformed.csv')
+print(iris_transformed.head())
 ```
 
 ## Analysis Outputs
 
-### Visualizations Generated
-- Histograms and distribution plots
-- Box plots for outlier detection
-- Scatter plots for correlation analysis
-- Heatmaps for feature relationships
-- Bar charts for categorical analysis
-- Time series patterns (where applicable)
+### Generated Visualizations
+- Feature distribution plots (histograms)
+- Pairwise scatter plots
+- Box plots by species
+- Correlation heatmaps
+- 3D scatter plots for feature visualization
 
 ### Statistical Reports
-- Descriptive statistics
-- Correlation matrices
-- Distribution analyses
-- Hypothesis testing results
-- Outlier identification
+- Descriptive statistics by species
+- Feature correlation matrices
+- Mean and variance analysis
+- Distribution characteristics
 
 ## Data Quality & Preprocessing
 
 ### Handled Issues
-- Missing values: Identified and appropriately handled
-- Outliers: Detected and managed
-- Categorical variables: Encoded for analysis
-- Duplicate records: Identified and removed
-- Data validation: Checked for consistency
+- Missing value detection and handling
+- Outlier identification
+- Feature scaling and normalization
+- Data type validation
+- Duplicate record detection
 
-### Data Types
-- Numerical: Age, BMI, Charges, Loan Amount
-- Categorical: Gender, Region, Smoking Status, Employment Type
-- Boolean: Approval Status, Loan Status
-
-## Results & Insights
-
-### Medical Insurance Insights
-1. **Premium Drivers**: Age and smoking status are primary cost drivers
-2. **Regional Patterns**: Significant variation in premium pricing by region
-3. **BMI Impact**: Higher BMI correlates with increased premiums
-4. **Demographics**: Insurance costs increase significantly with age
-
-### Loan Analysis Insights
-1. **Approval Factors**: Multiple factors influence loan approval
-2. **Credit History**: Crucial for loan approval probability
-3. **Income Factor**: Higher income positively impacts approval
-4. **Employment Stability**: Longer employment duration increases approval chances
-
-## Reproducibility
-
-All analyses are fully reproducible:
-- Fixed random seeds where applicable
-- All data sources included
-- Complete code documentation
-- Step-by-step explanations
-- Output saved for verification
-
-## Future Enhancements
-
-- Predictive modeling (Linear/Logistic Regression, Random Forest)
-- Time series analysis if temporal data available
-- Advanced feature engineering
-- Machine learning model deployment
-- Interactive dashboards (Plotly/Dash)
-- API development for predictions
+### Data Pipeline
+```
+Raw CSV → Extraction → Validation → Transformation → 
+Normalization → Staging → Analysis → Visualization
+```
 
 ## Project Workflow
 
-```
-Raw Data → Extraction → Cleaning → Transformation → 
-Feature Engineering → Analysis → Visualization → Insights
-```
+1. **Data Collection**: Raw datasets stored in `data/raw/`
+2. **Extraction**: Python scripts extract data from CSV files
+3. **Transformation**: Data cleaning, validation, and transformation
+4. **Loading**: Processed data stored in `data/staged/`
+5. **Analysis**: Jupyter notebook performs EDA and statistical analysis
+6. **Visualization**: Generate charts and insights
 
 ## File Descriptions
 
 | File | Type | Purpose |
 |------|------|----------|
-| ETL_Project.ipynb | Jupyter Notebook | Medical Insurance EDA |
-| stats.ipynb | Jupyter Notebook | Loan Statistics Analysis |
-| loan.ipynb | Jupyter Notebook | Loan Data ETL & Processing |
-| my_insurance_data.csv | Dataset | Medical Insurance Records |
-| loan_approved.csv | Dataset | Loan Approval Data |
-| .env | Configuration | Environment variables |
-| scripts/ | Directory | Utility and helper scripts |
-| data/ | Directory | Data storage |
+| etl_analysis_iris.ipynb | Jupyter Notebook | Iris ETL Analysis and Exploration |
+| data/raw/iris_raw.csv | CSV Dataset | Raw Iris Classification Data |
+| data/raw/titanic_raw.csv | CSV Dataset | Raw Titanic Dataset |
+| data/staged/iris_transformed.csv | CSV Dataset | Transformed Iris Data |
+| scripts/extract_iris.py | Python Script | Iris Data Extraction |
+| scripts/extract_titanic.py | Python Script | Titanic Data Extraction |
+| scripts/load_iris.py | Python Script | Iris Data Loading |
+| scripts/transform_iris.py | Python Script | Iris Data Transformation |
+| .env | Configuration | Environment Variables |
+| README.md | Documentation | Project Documentation |
 
 ## Performance & Scalability
 
-- Current implementation handles datasets with thousands of records efficiently
+- Current implementation efficiently handles datasets with thousands of records
 - Memory-optimized data processing using pandas
 - Vectorized operations for fast computations
 - Suitable for datasets up to several GB
@@ -289,42 +277,51 @@ Feature Engineering → Analysis → Visualization → Insights
 
 ### Common Issues
 
-**Issue**: Jupyter kernel won't start
-**Solution**: Reinstall jupyter and ipython
-```bash
-pip install --upgrade jupyter ipython
-```
-
-**Issue**: Missing dependencies
+**Issue**: Module not found error
 **Solution**: Install all requirements
 ```bash
 pip install pandas numpy matplotlib seaborn jupyter
 ```
 
+**Issue**: Jupyter kernel won't start
+**Solution**: Reinstall jupyter
+```bash
+pip install --upgrade jupyter ipython
+```
+
 **Issue**: Data file not found
-**Solution**: Ensure CSV files are in the project root directory
+**Solution**: Ensure CSV files are in the correct directories:
+- `data/raw/iris_raw.csv`
+- `data/raw/titanic_raw.csv`
+
+**Issue**: Environment variables not loading
+**Solution**: 
+1. Create `.env` file in project root
+2. Add your Supabase credentials
+3. Restart Jupyter kernel
 
 ## Best Practices Implemented
 
-- Clean, readable code with proper comments
-- Modular notebook structure
-- Error handling and validation
+- Clean, readable Python code with comments
+- Modular script structure
+- Proper error handling and validation
 - Consistent naming conventions
 - Comprehensive documentation
 - Reproducible analysis workflow
 - Version control with git
+- Separation of raw and processed data
 
 ## Learning Outcomes
 
 This project demonstrates proficiency in:
-- Data extraction and loading
+- Data extraction from CSV files
 - Data cleaning and preprocessing
 - Exploratory Data Analysis (EDA)
-- Statistical analysis
-- Data visualization
+- Statistical analysis and visualization
 - Python programming with pandas/numpy
 - Jupyter notebook usage
 - ETL pipeline development
+- Database integration (Supabase)
 - Data-driven decision making
 
 ## Contributing
@@ -337,7 +334,7 @@ This project is open source and available under the MIT License.
 
 ## Author
 
-**Abhinav7301** - Data Analysis & ETL Project
+**Abhinav7301** - Data Science & ETL Project Developer
 
 ## Contact & Support
 
@@ -347,16 +344,18 @@ For questions or issues, please:
 
 ## Acknowledgments
 
-- Dataset sources and providers
+- Iris dataset from UCI Machine Learning Repository
+- Titanic dataset from Kaggle
 - Python community and libraries used
 - Data science best practices and standards
 
 ## Project Timeline
 
-- Data collection and preparation
-- EDA and exploration phase
-- Statistical analysis
-- Visualization and insights generation
+- Data extraction pipeline development
+- ETL script creation
+- Data transformation and cleaning
+- Exploratory analysis
+- Visualization generation
 - Documentation and finalization
 
 ## Additional Resources
@@ -366,17 +365,19 @@ For questions or issues, please:
 - [Matplotlib Documentation](https://matplotlib.org/)
 - [Jupyter Documentation](https://jupyter.org/)
 - [Seaborn Documentation](https://seaborn.pydata.org/)
+- [Supabase Documentation](https://supabase.io/docs/)
 
 ## Version History
 
 ### v1.0 (Current)
-- Initial project setup
-- Medical Insurance EDA
-- Loan Statistics Analysis
-- Loan Data Processing
+- Iris dataset ETL pipeline
+- Titanic data extraction
+- Exploratory data analysis
+- Python ETL scripts
+- Jupyter notebook analysis
 - Comprehensive documentation
 
 ---
 
-**Last Updated**: 2024
-**Project Status**: Complete & Active
+**Last Updated**: December 2024
+**Project Status**: Active Development
